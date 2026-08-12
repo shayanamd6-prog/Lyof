@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لیو کافه | تجربه طعم و آرامش اصیل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #f7f4ed;
+            --bg-card: #ffffff;
+            --primary-green: #1b382b;
+            --primary-green-light: #2a4f3d;
+            --accent-green: #3d6852;
+            --cream-soft: #ede6d8;
+            --cream-light: #fbf9f5;
+            --gold-accent: #c6a27e;
+            --text-primary: #17241c;
+            --text-secondary: #526358;
+            --border-light: rgba(27, 56, 43, 0.1);
+            --border-active: rgba(27, 56, 43, 0.3);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.8;
+            padding-bottom: 80px;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            top: -15%;
+            right: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(61, 104, 82, 0.12) 0%, transparent 65%);
+            z-index: -1;
+            filter: blur(100px);
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(247, 244, 237, 0.88);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-badge {
+            background: var(--primary-green);
+            color: var(--cream-soft);
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        nav { display: flex; gap: 30px; }
+        nav a { color: var(--text-secondary); text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; }
+        nav a:hover { color: var(--primary-green); }
+
+        .nav-btn, .btn-reserve {
+            background: var(--primary-green);
+            color: #ffffff;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(27, 56, 43, 0.2);
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover, .btn-reserve:hover { 
+            background: var(--primary-green-light); 
+            transform: translateY(-2px); 
+            box-shadow: 0 12px 25px rgba(27, 56, 43, 0.28); 
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 50px;
+            padding: 70px 8% 40px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--cream-soft);
+            border: 1px solid var(--border-active);
+            padding: 8px 18px;
+            border-radius: 30px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(61, 104, 82, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(61, 104, 82, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(61, 104, 82, 0); }
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+
+        .hero-summary { 
+            color: var(--text-secondary); 
+            font-size: 16px; 
+            margin-bottom: 30px; 
+            max-width: 580px; 
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 12px 26px;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--cream-soft);
+        }
+
+        .hero-image-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            box-shadow: 0 25px 50px rgba(27, 56, 43, 0.08);
+            position: relative;
+        }
+
+        .hero-image-card img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+        }
+
+        .cafe-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            padding: 0 8%;
+            margin: 60px 0;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            background: var(--cream-soft);
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-item h4 { font-size: 16px; font-weight: 800; color: var(--primary-green); }
+        .feature-item p { font-size: 13px; color: var(--text-secondary); }
+
+        .menu-section {
+            padding: 50px 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary-green);
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .tabs-header {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--cream-soft);
+            border: none;
+            color: var(--text-secondary);
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-green);
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(27, 56, 43, 0.2);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-active);
+            box-shadow: 0 15px 35px rgba(27, 56, 43, 0.08);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .menu-item-title { font-weight: 800; font-size: 17px; color: var(--primary-green); }
+        .menu-item-price { font-weight: 900; font-size: 16px; color: var(--accent-green); }
+        .menu-item-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 15px; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* مودال رزرو و سفارش آنلاین */
+        #reserveModal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(23, 36, 28, 0.7);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            padding: 20px;
+        }
+
+        #reserveModal.active { display: flex !important; }
+
+        .modal-box {
+            background: #ffffff;
+            border: 1px solid var(--border-active);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 480px;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 18px; left: 18px;
+            background: var(--cream-soft);
+            border: none;
+            color: var(--primary-green);
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-field { margin-bottom: 16px; text-align: right; }
+        .form-field label { display: block; font-size: 13px; font-weight: 700; color: var(--primary-green); margin-bottom: 6px; }
+        .form-field input, .form-field select, .form-field textarea {
+            width: 100%;
+            background: var(--cream-light);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+            border-color: var(--primary-green);
+            background: #ffffff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary-green);
+            color: #ffffff;
+            font-weight: 800;
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(27, 56, 43, 0.2);
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-green-light);
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 30px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-green);
+            color: #ffffff;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 800;
+            display: none;
+            z-index: 1000000;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-summary { margin: 0 auto 30px; }
+            .hero-actions { justify-content: center; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <header>
+        <div class="logo">
+            ☕ لیو کافه <span class="logo-badge">LIO CAFE</span>
+        </div>
+        <nav>
+            <a href="#menu">منوی کافه</a>
+            <a href="#about">درباره ما</a>
+            <a href="#contact">ارتباط با ما</a>
+        </nav>
+        <button class="nav-btn btn-open-modal">رزرو سریع میز</button>
+    </header>
+
+    <section class="hero">
+        <div>
+            <div class="status-badge">
+                <span class="pulse-dot"></span>
+                <span>همه روزه از ساعت ۸ صبح تا ۱۱ شب پذیرای شما هستیم</span>
+            </div>
+
+            <h1>تجربه‌ای متفاوت از طعم اصیل قهوه و آرامش</h1>
+            <p class="hero-summary">
+                در لیو کافه، دانه‌های تازه برشته‌شده قهوه عربیکا با هنر باریستاهای حرفه‌ای ترکیب می‌شوند تا لحظاتی دلپذیر و فراموش‌نشدنی را برای شما بسازند.
+            </p>
+
+            <div class="hero-actions">
+                <button class="btn-reserve btn-open-modal">
+                    🪑 رزرو آنلاین میز
+                </button>
+                <a href="#menu" class="btn-outline">مشاهده منو</a>
+            </div>
+        </div>
+
+        <div class="hero-image-card">
+            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80" alt="فضای داخلی لیو کافه">
+        </div>
+    </section>
+
+    <section class="cafe-features">
+        <div class="feature-item">
+            <div class="feature-icon">🌿</div>
+            <div>
+                <h4>۱۰۰٪ عربیکا تخصصی</h4>
+                <p>دانه‌های تازه برشته‌شده از بهترین مزارع</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🍰</div>
+            <div>
+                <h4>دسر و کیک روز</h4>
+                <p>پخت روزانه با مواد اولیه تازه و ارگانیک</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">💻</div>
+            <div>
+                <h4>مناسب برای کار و مطالعه</h4>
+                <p>اینترنت پرسرعت و فضای آرام با موسیقی لایت</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+        <div class="section-title">
+            <h2>منوی اختصاصی لیو کافه</h2>
+            <p>انتخابی از محبوب‌ترین نوشیدنی‌ها و خوراکی‌های تازه</p>
+        </div>
+
+        <div class="tabs-header">
+            <button class="tab-btn active" onclick="switchTab(event, 'tab-hot')">☕ نوشیدنی گرم</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-cold')">🍹 نوشیدنی سرد</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-dessert')">🥐 کیک و شیرینی</button>
+        </div>
+
+        <!-- تب قهوه‌های گرم -->
+        <div class="tab-content active" id="tab-hot">
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-title">اسپرسو سینگل / دبل</span>
+                        <span class="menu-item-price">۶۵,۰۰۰ تومان</span>
+                    </div>
+                    <p class="menu-item-desc">عصاره‌گیری دقیق از دانه‌های ۱۰۰٪ عربیکا با طعم‌یاد شکلاتی و آجیلی.</p>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-title">کاپوچینو ایتالیایی</span>
+                        <span class="menu-item-price">۹۵,۰۰۰ تومان</span>
+                    </div>
+                    <p class="menu-item-desc">ترکیب اسپرسو دبل با فوم شیر مخملی و پودر کاکائو غنی.</p>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-title">لاته وانیل زعفران</span>
+                        <span class="menu-item-price">۱۱۰,۰۰۰ تومان</span>
+                    </div>
+                    <p class="menu-item-desc">نوشیدنی امضا کافه؛ ترکیب اسپرسو، شیر گرم، عصاره طبیعی زعفران و وانیل.</p>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-title">V60 دمی تخصصی</span>
+                        <span class="menu-item-price">۱۲۵,۰۰۰ تومان</span>
+                    </div>
+                    <p class="menu-item-desc">قهوه دمی با اسیدیته شفاف و طعم‌یادهای میوه‌ای معطر.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- تب نوشیدنی سرد -->
+        <div class="tab-content" id="tab-cold">
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-title">آیس لاته کارامل</span>
+                        <span class="menu-item-price">۱۰۵,۰۰۰ تومان</span>
+                    </div>
+                    <p class="menu-item-desc">اسپرسو سرد، شیر خنک، سس کارامل دست‌ساز و قالب‌های یخ.</p>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-title">موکیتو نعناع خیار</span>
+                        <span class="menu-item-price">۸۵,۰۰۰ تومان</span>
+                    </div>
+                    <p class="menu-item-desc">ترکیب طراوت‌بخش نعناع تازه، لیمو ترش، عصاره خیار و سودا.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- تب کیک و دسر -->
+        <div class="tab-content" id="tab-dessert">
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-title">چیزکیک نیویورکی</span>
+                        <span class="menu-item-price">۱۲۰,۰۰۰ تومان</span>
+                    </div>
+                    <p class="menu-item-desc">با بافت باکلاس و سس توت‌فرنگی تازه پخته‌شده در کافه.</p>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-title">کرواسان شکلاتی گرم</span>
+                        <span class="menu-item-price">۸۵,۰۰۰ تومان</span>
+                    </div>
+                    <p class="menu-item-desc">کرواسان کره ای لایه‌ای سرو شده همراه با مغز شکلات فندقی.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- مودال رزرو آنلاین -->
+    <div id="reserveModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+            
+            <h3 style="text-align: center; font-size: 20px; color: var(--primary-green); margin-bottom: 6px;">رزرو آنلاین میز در لیو کافه</h3>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 13px; margin-bottom: 20px;">اطلاعات خود را وارد کنید تا میز شما آماده شود</p>
+
+            <form id="reserveForm">
+                <div class="form-field">
+                    <label>نام و نام خانوادگی *</label>
+                    <input type="text" required placeholder="مثال: سارا احمدی">
+                </div>
+                <div class="form-field">
